@@ -77,38 +77,111 @@ df1 = pd.DataFrame(np.random.rand(6,6), columns = columns, index = indices)
 
 Q4. Write a code to find the following statistical measurements for the above dataframe df1:
 (i) mean of each and every column present in the dataframe.
+ans.
+import pandas as pd
+import numpy as np
+columns = ['column_1', 'column_2', 'column_3', 'column_4', 'column_5', 'column_6']
+indices = [1,2,3,4,5,6]
+df1 = pd.DataFrame(np.random.rand(6,6), columns = columns, index = indices)
 
+df1.mean()
 
-
-
-
-
+column_1    0.435379
+column_2    0.360407
+column_3    0.395228
+column_4    0.294997
+column_5    0.433254
+column_6    0.418736
+dtype: float64
 
 (ii) standard deviation of column, ‘column_2’
+ANS. 
+import pandas as pd
+import numpy as np
+columns = ['column_1', 'column_2', 'column_3', 'column_4', 'column_5', 'column_6']
+indices = [1,2,3,4,5,6]
 
+df1 = pd.DataFrame(np.random.rand(6,6), columns = columns, index = indices)
+df['column_2'].std()
 
+OUTPUT--
+0.24728608829478585
 
 
 Q5. Replace the data present in the second row of column, ‘column_2’ by a string variable then find the
 mean of column, column_2.
 If you are getting errors in executing it then explain why.
 [Hint: To replace the data use df1.loc[] and equate this to string data of your choice.]
+ans. import pandas as pd
+import numpy as np
+
+columns = ['column_1', 'column_2', 'column_3', 'column_4', 'column_5', 'column_6']
+indices = [1, 2, 3, 4, 5, 6]
+
+df1 = pd.DataFrame(np.random.rand(6, 6), columns=columns, index=indices)
+
+# replace the data in the second row of 'column_2' with a string variable
+df1.loc[2, 'column_2'] = 'some string'
+
+# compute the mean of 'column_2'
+mean_column_2 = df1['column_2'].mean()
+
+print(mean_column_2)
 
 
 
 Q6. What do you understand about the windows function in pandas and list the types of windows
 functions?
+ans.In pandas, a window function is a way to perform calculations on a subset of data within a larger dataset. It allows you to apply a function to a rolling window of data, where the size of the window is determined by a specified number of rows or a time period.
 
+There are several types of window functions available in pandas:
+
+Rolling window functions: These functions operate on a sliding window of a fixed size and compute a single output value for each window. Examples include rolling mean, rolling standard deviation, rolling sum, etc.
+
+Expanding window functions: These functions include all previous rows in the calculation, so the size of the window grows with each new row. Examples include expanding mean, expanding sum, etc.
+
+Exponentially weighted window functions: These functions assign exponentially decreasing weights to the data in the window, with the most recent values given the highest weight. Examples include exponentially weighted moving average, etc.
+
+Rolling window aggregation functions: These functions aggregate multiple statistics over the rolling window, such as the rolling min, max, and mean.
+
+Window functions with
 
 
 Q7. Write a code to print only the current month and year at the time of answering this question.
 [Hint: Use pandas.datetime function]
+ans. import datetime
+
+# get the current date and time
+now = datetime.datetime.now()
+
+# extract the current month and year from the datetime object
+current_month = now.month
+current_year = now.year
+
+# print the current month and year
+print(f"Current month and year: {current_month}/{current_year}")
 
 
 
 Q8. Write a Python program that takes in two dates as input (in the format YYYY-MM-DD) and
 calculates the difference between them in days, hours, and minutes using Pandas time delta. The
 program should prompt the user to enter the dates and display the result.
+ans. import pandas as pd
+
+
+date1_str = input("Enter the first date (YYYY-MM-DD): ")
+date2_str = input("Enter the second date (YYYY-MM-DD): ")
+
+date1 = pd.to_datetime(date1_str)
+date2 = pd.to_datetime(date2_str)
+
+time_diff = date2 - date1
+
+days_diff = time_diff.days
+hours_diff = time_diff.seconds // 3600
+minutes_diff = (time_diff.seconds % 3600) // 60
+
+print(f"The difference between {date1_str} and {date2_str} is {days_diff} days, {hours_diff} hours, and {minutes_diff} minutes.")
 
 
 
@@ -116,6 +189,16 @@ program should prompt the user to enter the dates and display the result.
 Q9. Write a Python program that reads a CSV file containing categorical data and converts a specified
 column to a categorical data type. The program should prompt the user to enter the file path, column
 name, and category order, and then display the sorted data.
+ans. 
+ans.import pandas as pd
+
+file_path = input("Enter the file path: ")
+df = pd.read_csv(file_path)
+column_name = input("Enter the column name: ")
+category_order = input("Enter the category order (comma-separated): ").split(',')
+df[column_name] = pd.Categorical(df[column_name], categories=category_order)
+df_sorted = df.sort_values(by=column_name)
+print(df_sorted)
 
 
 
